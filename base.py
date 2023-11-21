@@ -8,7 +8,7 @@ def main():
     nombre = input("Ingrese su nombre: ")
     apellido = input("Ingrese su apellido: ")
     
-    base_datos = pd.read_excel('C:/Users/TuUsuario/Desktop/baseDatos.xlsx')
+    base_datos = pd.read_excel('C:/Users/ravac/Desktop/baseDatos.xlsx')
 
     if verificar_acceso(nombre, apellido, base_datos):
         print("Acceso concedido. Ahora puedes realizar tu pedido")
