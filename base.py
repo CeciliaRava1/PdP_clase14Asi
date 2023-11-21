@@ -27,6 +27,5 @@ def main():
         print("Acceso concedido. ¡Eres una persona de la facultad!")
     else:
         print("Acceso denegado. No estás en la lista.")
-
-if __name__ == "__main__":
+        
     main()
