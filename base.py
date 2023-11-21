@@ -1,31 +1,18 @@
 import pandas as pd
 
-def verificar_acceso(nombre, apellido, base_datos):
-    # Convertir el nombre y apellido a formato adecuado para la comparación
-    nombre = nombre.strip().capitalize()
-    apellido = apellido.strip().capitalize()
-
-    # Verificar si el usuario está en la base de datos
-    resultado = base_datos[(base_datos['Nombre'] == nombre) & (base_datos['Apellido'] == apellido)]
-
-    return not resultado.empty
+verificar_acceso = lambda nombre, apellido, base_datos: any(base_datos.apply(lambda row: row['Nombre'].strip().capitalize() == nombre.strip().capitalize() and row['Apellido'].strip().capitalize() == apellido.strip().capitalize(), axis=1))
 
 def main():
-    # Solicitar nombre y apellido al usuario
+    print("Bienvenido al sistema de pedidos de Cantina de UTN FRVM")
+    print("Validaremos su identidad")
     nombre = input("Ingrese su nombre: ")
     apellido = input("Ingrese su apellido: ")
+    
+    base_datos = pd.read_excel('C:/Users/TuUsuario/Desktop/baseDatos.xlsx')
 
-    # Cargar la base de datos desde el archivo Excel
-    try:
-        base_datos = pd.read_excel('C:/Users/TuUsuario/Desktop/baseDatos.xlsx')
-    except FileNotFoundError:
-        print("Error: No se encontró el archivo 'baseDatos.xlsx' en el escritorio.")
-        return
-
-    # Verificar acceso y mostrar el resultado
     if verificar_acceso(nombre, apellido, base_datos):
-        print("Acceso concedido. ¡Eres una persona de la facultad!")
+        print("Acceso concedido. Ahora puedes realizar tu pedido")
     else:
-        print("Acceso denegado. No estás en la lista.")
+        print("Acceso denegado. No perteneces al personal de la facultad.")
         
-    main()
+main()
